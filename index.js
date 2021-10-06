@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const logger = require('./utils/logger');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -38,7 +39,6 @@ app.get('/api/persons', (req, res) => {
 // GET - persons/id
 app.get('/api/persons/:id', (req, res) => {
   const id = req.params.id;
-  console.log(mongoose.isValidObjectId(id));
   if (mongoose.isValidObjectId(id)) {
     Person.findById(id)
       .then(result => {
@@ -107,5 +107,5 @@ app.delete('/api/persons/:id', (req, res) => {
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logger.info(`Server running on port ${PORT}`);
 });
