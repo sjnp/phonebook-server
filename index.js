@@ -1,9 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
+const config = require('./utils/config')
 const cors = require('cors');
 
-require('dotenv').config();
 const mongoose = require('mongoose');
 const Person = require('./models/person');
 
@@ -105,7 +105,6 @@ app.delete('/api/persons/:id', (req, res) => {
   }
 })
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`);
 });
